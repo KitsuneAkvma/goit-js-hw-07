@@ -36,14 +36,12 @@ gallery.addEventListener(`click`, (event) => {
   if (event.target.tagName.toLowerCase() !== "img") {
     return;
   }
-  const imageSrc = event.target.getAttribute("src"); // get image src
+  const imageSrc = event.target.child.getAttribute("src"); // get image src
   // find object in 'galleryItems' array by preview's src, then get that object's 'original' value
-  const originalImage = galleryItems.find(
-    (element) => element.preview == imageSrc
-  ).original;
+  const originalImage = event.target.getAttribute("href");
 
   // create modal window with basicLightBox
-  var lightbox = new SimpleLightbox(".gallery a", {});
+  var lightbox = new SimpleLightbox(event.currentTarget, {});
   // show modal
   lightbox.show();
 });
