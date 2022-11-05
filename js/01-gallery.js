@@ -1,6 +1,6 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
-const basicLightbox = require("basiclightbox");
+
 // Defining DOM elements
 
 const gallery = document.querySelector(".gallery");
@@ -10,7 +10,7 @@ function createGallery() {
   for (const image in galleryItems) {
     // creating gallery elements
     const photo = document.createElement("img");
-    const photoContainer = document.createElement("div");
+    const photoContainer = document.createElement("li");
     photoContainer.classList.add("gallery__item");
 
     // appending galleryItem to gallery and galleryImage to galleryItem
@@ -39,9 +39,15 @@ gallery.addEventListener(`click`, (event) => {
   ).original;
 
   // create modal window with basicLightBox
-  const instance = basicLightbox.create(`
+  var instance = basicLightbox.create(`
     <img src="${originalImage}">
 `);
   // show modal
   instance.show();
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code == "Escape" && instance.visible()) {
+      instance.close();
+    }
+  });
 });
