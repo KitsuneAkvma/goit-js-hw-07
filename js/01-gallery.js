@@ -33,13 +33,16 @@ gallery.addEventListener(`click`, (event) => {
   if (event.target.tagName.toLowerCase() !== "img") {
     return;
   }
-  console.log(event.target);
-  const instance = basicLightbox.create(`
-    <img src="https://pbs.twimg.com/media/FHvTRyeWUAI93hG.jpg" width="800" height="600">
-`);
+  const imageSrc = event.target.getAttribute("src"); // get image src
+  // find object in 'galleryItems' array by preview's src, then get that object's 'original' value
+  const originalImage = galleryItems.find(
+    (element) => element.preview == imageSrc
+  ).original;
 
+  // create modal window with basicLightBox
+  const instance = basicLightbox.create(`
+    <img src="${originalImage}">
+`);
+  // show modal
   instance.show();
 });
-
-console.log(galleryItems);
-console.log(galleryItems.length);
