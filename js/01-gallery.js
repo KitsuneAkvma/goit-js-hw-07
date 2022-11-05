@@ -1,7 +1,6 @@
 import { galleryItems } from "./gallery-items.js";
-
 // Change code below this line
-
+const basicLightbox = require("basiclightbox");
 // Defining DOM elements
 
 const gallery = document.querySelector(".gallery");
