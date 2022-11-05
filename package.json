@@ -11,6 +11,13 @@
   "dependencies": {
     "basiclightbox": "^5.0.4"
   },
-  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KitsuneAkvma/goit-js-hw-07.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KitsuneAkvma/goit-js-hw-07/issues"
+  },
+  "homepage": "https://github.com/KitsuneAkvma/goit-js-hw-07#readme",
   "description": ""
 }
