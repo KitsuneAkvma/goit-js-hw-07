@@ -10,14 +10,12 @@ function createGallery() {
   for (const image in galleryItems) {
     // creating gallery elements
     const photo = document.createElement("img");
-    const photoContainer = document.createElement("li");
     const galleryItem = document.createElement("a");
 
     galleryItem.classList.add("gallery__item");
 
     // appending galleryItem to gallery and galleryImage to galleryItem
-    gallery.appendChild(photoContainer);
-    photoContainer.appendChild(galleryItem);
+    gallery.appendChild(galleryItem);
     galleryItem.appendChild(photo);
 
     // setting classes and attributes to each photo
@@ -31,19 +29,17 @@ function createGallery() {
 // calling functions
 createGallery();
 
+// creating slideshow form gallery's elements
+var lightbox = new SimpleLightbox(".gallery a", {});
+
 // calling modal with original image's size
 gallery.addEventListener(`click`, (event) => {
-  if (event.target.tagName.toLowerCase() !== "img") {
+  if (event.target.tagName.toLowerCase() !== "a") {
     return;
   }
-  const imageSrc = event.target.child.getAttribute("src"); // get image src
   // find object in 'galleryItems' array by preview's src, then get that object's 'original' value
   const originalImage = event.target.getAttribute("href");
 
-  // create modal window with basicLightBox
-  var lightbox = new SimpleLightbox(event.currentTarget, {});
   // show modal
-  lightbox.show();
+  lightbox.open();
 });
-
-console.log(galleryItems);
