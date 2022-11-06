@@ -2,25 +2,33 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 // Defining DOM elements
-
 const gallery = document.querySelector(".gallery");
 
 // creating gallery items and images
 function createGallery() {
   for (const image in galleryItems) {
     // creating gallery elements
-    const photo = document.createElement("img");
-    const photoContainer = document.createElement("li");
-    photoContainer.classList.add("gallery__item");
+    const galleryItem = document.createElement("div");
+    const galleryLink = document.createElement("a");
+    const galleryImage = document.createElement("img");
 
-    // appending galleryItem to gallery and galleryImage to galleryItem
-    gallery.appendChild(photoContainer);
-    photoContainer.appendChild(photo);
+    galleryItem.classList.add("gallery__item");
+
+    // creating gallery items relations
+    gallery.appendChild(galleryItem);
+    galleryItem.appendChild(galleryLink);
+    galleryLink.appendChild(galleryImage);
 
     // setting classes and attributes to each photo
-    photo.classList.add("gallery__image");
-    photo.setAttribute(`src`, `${galleryItems[image].preview}`);
-    photo.setAttribute("alt", `${galleryItems[image].description}`);
+    galleryItem.classList.add("gallery__item");
+
+    galleryLink.classList.add("gallery__link");
+    //galleryLink.setAttribute(`href`, `${galleryItems[image].original}`);
+
+    galleryImage.classList.add(`gallery__image`);
+    galleryImage.setAttribute(`src`, `${galleryItems[image].preview}`);
+    galleryImage.setAttribute(`data-source`, `${galleryItems[image].original}`);
+    galleryImage.setAttribute(`alt`, `${galleryItems[image].description}`);
   }
 }
 
@@ -32,19 +40,14 @@ gallery.addEventListener(`click`, (event) => {
   if (event.target.tagName.toLowerCase() !== "img") {
     return;
   }
-  const imageSrc = event.target.getAttribute("src"); // get image src
-  // find object in 'galleryItems' array by preview's src, then get that object's 'original' value
-  const originalImage = galleryItems.find(
-    (element) => element.preview == imageSrc
-  ).original;
-
+  let targetImage = event.target.getAttribute("data-source");
   // create modal window with basicLightBox
-  var instance = basicLightbox.create(`
-    <img src="${originalImage}">
-`);
+  var instance = basicLightbox.create(`<img src="${targetImage}">`);
   // show modal
   instance.show();
 
+  console.log(targetImage);
+  // closing gallery with "Esc" key
   document.addEventListener("keydown", (event) => {
     if (event.code == "Escape" && instance.visible()) {
       instance.close();
