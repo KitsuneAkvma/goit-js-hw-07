@@ -35,22 +35,24 @@ function createGallery() {
 // calling functions
 createGallery();
 
+// create modal window with basicLightBox
+var instance = basicLightbox.create(`<img src="null">`);
+
 // calling modal with original image's size
 gallery.addEventListener(`click`, (event) => {
   if (event.target.tagName.toLowerCase() !== "img") {
     return;
   }
   let targetImage = event.target.getAttribute("data-source");
-  // create modal window with basicLightBox
-  var instance = basicLightbox.create(`<img src="${targetImage}">`);
+
+  instance = basicLightbox.create(`<img src="${targetImage}">`);
   // show modal
   instance.show();
+});
 
-  console.log(targetImage);
-  // closing gallery with "Esc" key
-  document.addEventListener("keydown", (event) => {
-    if (event.code == "Escape" && instance.visible()) {
-      instance.close();
-    }
-  });
+// closing gallery with "Esc" key
+document.addEventListener("keydown", (event) => {
+  if (event.code == "Escape" && instance.visible()) {
+    instance.close();
+  }
 });
