@@ -29,6 +29,7 @@ function createGallery() {
     galleryImage.setAttribute(`src`, `${galleryItems[image].preview}`);
     galleryImage.setAttribute(`data-source`, `${galleryItems[image].original}`);
     galleryImage.setAttribute(`alt`, `${galleryItems[image].description}`);
+    
   }
 }
 

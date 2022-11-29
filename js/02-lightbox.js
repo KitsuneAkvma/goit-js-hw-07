@@ -22,6 +22,7 @@ function createGallery() {
     photo.classList.add("gallery__image");
     photo.setAttribute(`src`, `${galleryItems[image].preview}`);
     photo.setAttribute("alt", `${galleryItems[image].description}`);
+    photo.setAttribute(`title`, `${galleryItems[image].description}`);
     galleryItem.setAttribute(`href`, `${galleryItems[image].original}`);
   }
 }
